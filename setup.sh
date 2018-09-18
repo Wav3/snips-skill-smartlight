@@ -13,7 +13,7 @@ then
     virtualenv -p $PYTHON $VENV
 fi
 
-. $VENV/bin/activate
+source $VENV/bin/activate
 
 pip install -r requirements.txt
 
