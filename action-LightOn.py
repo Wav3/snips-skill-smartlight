@@ -33,7 +33,7 @@ def action_wrapper(hermes, intent_message, conf):
     apihost = conf['secret']['http_api_hostname']
     url = 'http://{}:{}/api/services/light/turn_on'.format(apihost, apiport)
     header = {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
         "x-ha-access": conf['secret']['http_api_password']
     }
     current_session_id = intent_message.session_id # get the current session id
