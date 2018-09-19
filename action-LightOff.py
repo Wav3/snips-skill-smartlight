@@ -40,18 +40,18 @@ def action_wrapper(hermes, intent_message, conf):
 
     if len(intent_message.slots.Zimmer) > 0: #turns on a specific light
         zimmer = intent_message.slots.Zimmer.first().value # extract the value from the slot Zimmer
-        result_sentence = "Licht in Raum {} eingeschaltet.".format(str(zimmer))
+        result_sentence = "Licht in Raum {} ausgeschaltet.".format(str(zimmer))
         body = {
             "entity_id": "light.{}".format(str(zimmer))
         }
         json_body = json.dumps(body)
         request = requests.post(url, data = json_body, headers = header)
     else: # turns on every known light
-        result_sentence = "Alle Lichter wurden eingeschaltet"
+        result_sentence = "Alle Lichter wurden ausgeschaltet"
         request = requests.post(url, headers = header)
     
     if request.status_code != 200: # if the action is failed, set the response to failed
-        result_sentence = "Das Lichtanschalten ist fehlgeschlagen"
+        result_sentence = "Das Lichtausschalten ist fehlgeschlagen"
         print('Error during enabling light.\nStatuscode: {}\nResponse message: {}'.format(request.status_code, request.content))
 
     hermes.publish_end_session(current_session_id, result_sentence)
